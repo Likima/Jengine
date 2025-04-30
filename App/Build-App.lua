@@ -11,14 +11,28 @@ project "App"
    {
       "Source",
 
-	  -- Include Core
-	  "../Core/Source"
+      -- Include Core
+      "../Core/Source",
+      "../UI/Source"
    }
 
    links
    {
-      "Core"
+      "Core",
+      "UI"
    }
+   
+   -- Add GLFW linkage for the executable
+   filter "system:linux"
+       links { "glfw", "GL", "X11", "pthread", "dl" }
+   
+   filter "system:windows"
+       links { "glfw3", "opengl32" }
+       
+   filter "system:macosx"
+       links { "glfw3", "Cocoa.framework", "OpenGL.framework", "IOKit.framework", "CoreVideo.framework" }
+   
+   filter {}  -- Reset filter
 
    targetdir ("../Binaries/" .. OutputDir .. "/%{prj.name}")
    objdir ("../Binaries/Intermediates/" .. OutputDir .. "/%{prj.name}")

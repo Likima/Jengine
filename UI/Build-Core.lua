@@ -1,4 +1,4 @@
-project "Core"
+project "UI"
    kind "StaticLib"
    language "C++"
    cppdialect "C++20"
@@ -9,10 +9,21 @@ project "Core"
 
    includedirs
    {
-      "Source",
-      "UI"
+      "Source"
    }
 
+   -- Add GLFW linkage for different platforms
+   filter "system:linux"
+       links { "glfw", "GL", "X11", "pthread", "dl" }
+   
+   filter "system:windows"
+       links { "glfw3", "opengl32" }
+       
+   filter "system:macosx"
+       links { "glfw3", "Cocoa.framework", "OpenGL.framework", "IOKit.framework", "CoreVideo.framework" }
+   
+   filter {}  -- Reset filter
+   
    targetdir ("../Binaries/" .. OutputDir .. "/%{prj.name}")
    objdir ("../Binaries/Intermediates/" .. OutputDir .. "/%{prj.name}")
 

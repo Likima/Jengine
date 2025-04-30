@@ -14,4 +14,8 @@ group "Core"
 	include "Core/Build-Core.lua"
 group ""
 
+group "UI"
+    include "UI/Build-Core.lua"  -- Include the UI build script
+group ""
+
 include "App/Build-App.lua"

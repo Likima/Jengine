@@ -1,15 +1,15 @@
 #include "Core.h"
-#include "../Version.h"
+
+#include "Version.h"
 
 #include <iostream>
 
 namespace Core {
 
-	void PrintHelloWorld()
+	void Initialize()
 	{
 		std::cout << "Welcome to JEngine V" << GET_VERSION << std::endl;
 
-		std::cin.get();
 	}
 
 }
