@@ -14,14 +14,14 @@ project "App"
       -- Include Core
       "../Core/Source",
       "../UI/Source",
-      "../JEngine/Source"
+      "../Engine/Source"
    }
 
    links
    {
       "Core",
       "UI",
-      "JEngine"
+      "Engine"
    }
    
    -- Add GLFW linkage for the executable

@@ -9,7 +9,6 @@ namespace Core {
 	void Initialize()
 	{
 		std::cout << "Welcome to JEngine V" << GET_VERSION << std::endl;
-
 	}
 
 }

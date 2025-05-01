@@ -1,4 +1,4 @@
-project "JEngine"
+project "Engine"
    kind "StaticLib"
    language "C++"
    cppdialect "C++20"
