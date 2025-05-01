@@ -1,5 +1,5 @@
-project "App"
-   kind "ConsoleApp"
+project "JEngine"
+   kind "StaticLib"
    language "C++"
    cppdialect "C++20"
    targetdir "Binaries/%{cfg.buildcfg}"
@@ -10,21 +10,10 @@ project "App"
    includedirs
    {
       "Source",
-
-      -- Include Core
-      "../Core/Source",
-      "../UI/Source",
-      "../JEngine/Source"
+      "../UI/Source"
    }
 
-   links
-   {
-      "Core",
-      "UI",
-      "JEngine"
-   }
-   
-   -- Add GLFW linkage for the executable
+   -- Add GLFW linkage for different platforms
    filter "system:linux"
        links { "glfw", "GL", "X11", "pthread", "dl" }
    
@@ -35,13 +24,13 @@ project "App"
        links { "glfw3", "Cocoa.framework", "OpenGL.framework", "IOKit.framework", "CoreVideo.framework" }
    
    filter {}  -- Reset filter
-
+   
    targetdir ("../Binaries/" .. OutputDir .. "/%{prj.name}")
    objdir ("../Binaries/Intermediates/" .. OutputDir .. "/%{prj.name}")
 
    filter "system:windows"
        systemversion "latest"
-       defines { "WINDOWS" }
+       defines { }
 
    filter "configurations:Debug"
        defines { "DEBUG" }
