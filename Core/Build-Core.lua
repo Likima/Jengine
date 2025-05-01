@@ -9,8 +9,7 @@ project "Core"
 
    includedirs
    {
-      "Source",
-      "UI"
+      "Source"
    }
 
    targetdir ("../Binaries/" .. OutputDir .. "/%{prj.name}")

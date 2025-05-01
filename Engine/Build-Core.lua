@@ -1,7 +1,7 @@
 project "Engine"
    kind "StaticLib"
    language "C++"
-   cppdialect "C++20"
+   cppdialect "C++17"  -- Consistency
    targetdir "Binaries/%{cfg.buildcfg}"
    staticruntime "off"
 
@@ -13,18 +13,13 @@ project "Engine"
       "../UI/Source"
    }
 
-   -- Add GLFW linkage for different platforms
-   filter "system:linux"
-       links { "glfw", "GL", "X11", "pthread", "dl" }
+   links
+   {
+      "UI"
+   }
    
-   filter "system:windows"
-       links { "glfw3", "opengl32" }
-       
-   filter "system:macosx"
-       links { "glfw3", "Cocoa.framework", "OpenGL.framework", "IOKit.framework", "CoreVideo.framework" }
-   
-   filter {}  -- Reset filter
-   
+   -- GLFW linkage now handled by UI module
+
    targetdir ("../Binaries/" .. OutputDir .. "/%{prj.name}")
    objdir ("../Binaries/Intermediates/" .. OutputDir .. "/%{prj.name}")
 

@@ -5,8 +5,10 @@
 class JWindow {
 public:
     JWindow();
-
+    ~JWindow();
+    
+    bool CreateWindow();
 private:
-    GLFWwindow* Window;
-    bool Initialize();
+    GLFWwindow* window = nullptr;
+    void Initialize();
 };

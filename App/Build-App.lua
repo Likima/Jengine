@@ -1,7 +1,7 @@
 project "App"
    kind "ConsoleApp"
    language "C++"
-   cppdialect "C++20"
+   cppdialect "C++17"  -- Make consistent with other projects
    targetdir "Binaries/%{cfg.buildcfg}"
    staticruntime "off"
 
@@ -19,9 +19,10 @@ project "App"
 
    links
    {
-      "Core",
+      "Engine",
       "UI",
-      "Engine"
+      "Core"
+
    }
    
    -- Add GLFW linkage for the executable

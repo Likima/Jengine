@@ -6,7 +6,7 @@ int main()
 {
 	Core::Initialize();
 
-	UI_Core::Initialize();
+	// UI_Core::Initialize();
 
 	JEngine_Core::Initialize();
 }
