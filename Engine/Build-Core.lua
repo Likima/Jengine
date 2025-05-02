@@ -10,12 +10,14 @@ project "Engine"
    includedirs
    {
       "Source",
-      "../UI/Source"
+      "../UI/Source",
+      "../Game/Source"
    }
 
    links
    {
-      "UI"
+      "UI",
+      "Game"
    }
    
    -- GLFW linkage now handled by UI module
