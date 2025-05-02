@@ -46,7 +46,7 @@ game_state interpolate(game_state const & current, game_state const & previous, 
 
 JEngine::JEngine() {
 
-    // game = Game_Core::getGame();
+    game = Game_Core::getGame();
 
     std::cout << "JEngine successfully initialized!" << std::endl;
     jw = UI_Core::CreateJWindow();

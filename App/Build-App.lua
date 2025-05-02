@@ -14,6 +14,7 @@ project "App"
       -- Include Core
       "../Core/Source",
       "../UI/Source",
+      "../Game/Source",
       "../Engine/Source"
    }
 
@@ -21,8 +22,8 @@ project "App"
    {
       "Engine",
       "UI",
-      "Core"
-
+      "Core",
+      "Game"
    }
    
    -- Add GLFW linkage for the executable
