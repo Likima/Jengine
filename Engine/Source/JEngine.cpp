@@ -3,12 +3,14 @@
  */
 
 #include "JEngine.h"
+#include "Game_Core/game_core.h"
 
 #include <iostream>
 #include <chrono>
 
 JEngine::~JEngine(){
     delete jw;
+    delete game;
 }
 
 using namespace std::chrono_literals;
@@ -43,10 +45,14 @@ game_state interpolate(game_state const & current, game_state const & previous, 
 }
 
 JEngine::JEngine() {
+
+    // game = Game_Core::getGame();
+
     std::cout << "JEngine successfully initialized!" << std::endl;
     jw = UI_Core::CreateJWindow();
-
     jw->CreateWindow();
+
+    this->kh = new KeyHandler(jw->getWindow());
 
     using clock = std::chrono::high_resolution_clock;
 
@@ -58,6 +64,9 @@ JEngine::JEngine() {
     game_state previous_state;
   
     while(!quit_game) {
+
+      glfwPollEvents(); // key input
+
       auto delta_time = clock::now() - time_start;
       time_start = clock::now();
       lag += std::chrono::duration_cast<std::chrono::nanoseconds>(delta_time);

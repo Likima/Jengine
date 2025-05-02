@@ -2,6 +2,7 @@
 
 #include "UI_Core/ui_core.h"
 #include "game.h"
+#include "KeyHandler/KeyHandler.h"
 
 class JEngine {
 
@@ -10,5 +11,6 @@ public:
     ~JEngine();
 private:
     JWindow* jw = nullptr;
-    Game game;
+    Game* game;
+    KeyHandler* kh;
 };

@@ -8,6 +8,8 @@ public:
     ~JWindow();
     
     bool CreateWindow();
+
+    GLFWwindow* getWindow() { return window; }
 private:
     GLFWwindow* window = nullptr;
     void Initialize();

@@ -1,7 +1,7 @@
 project "Engine"
    kind "StaticLib"
    language "C++"
-   cppdialect "C++17"  -- Consistency
+   cppdialect "C++17"
    targetdir "Binaries/%{cfg.buildcfg}"
    staticruntime "off"
 
@@ -11,7 +11,8 @@ project "Engine"
    {
       "Source",
       "../UI/Source",
-      "../Game/Source"
+      "../Game/Source",       -- Add Game/Source
+      "../Game/ColorWave"     -- Add ColorWave directory too
    }
 
    links
@@ -20,8 +21,6 @@ project "Engine"
       "Game"
    }
    
-   -- GLFW linkage now handled by UI module
-
    targetdir ("../Binaries/" .. OutputDir .. "/%{prj.name}")
    objdir ("../Binaries/Intermediates/" .. OutputDir .. "/%{prj.name}")
 

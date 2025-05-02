@@ -13,6 +13,7 @@ OutputDir = "%{cfg.system}-%{cfg.architecture}/%{cfg.buildcfg}"
 group "Dependencies"
    include "Core/Build-Core.lua"
    include "UI/Build-Core.lua"
+   include "Game/Build-Core.lua" 
 group ""
 
 group "Engine"

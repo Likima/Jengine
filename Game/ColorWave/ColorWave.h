@@ -1,4 +1,4 @@
-#include "game.h"
+#include "game.h" // TODO <- get rid of this later. Make sure no unnecessary includes
 
 class ColorWave: public Game {
 public:
