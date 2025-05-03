@@ -20,10 +20,10 @@ constexpr std::chrono::nanoseconds timestep(16ms);
 
 
 
-bool handle_events() {
+bool JEngine::handle_events() {
   // poll for events
 
-  return false; // true if the user wants to quit the game
+  return kh->isTerminate(); // true if the user wants to quit the game
 }
 
 void JEngine::update(game_state * gs) {
@@ -56,12 +56,14 @@ JEngine::JEngine() {
 
     std::chrono::nanoseconds lag(0ns);
     auto time_start = clock::now();
-    bool quit_game = false;
+    bool terminate = false;
   
     game_state current_state;
     game_state previous_state;
   
-    while(!quit_game) {
+    while(!terminate) {
+
+
 
       glfwPollEvents(); // key input
 
@@ -69,7 +71,7 @@ JEngine::JEngine() {
       time_start = clock::now();
       lag += std::chrono::duration_cast<std::chrono::nanoseconds>(delta_time);
   
-      quit_game = handle_events();
+      terminate = handle_events();
   
       // update game logic as lag permits
       while(lag >= timestep) {
@@ -85,4 +87,6 @@ JEngine::JEngine() {
   
       render(interpolated_state);
     }    
+    
+    std::cout<<"Thank you for using JEngine!"<<std::endl;
 }

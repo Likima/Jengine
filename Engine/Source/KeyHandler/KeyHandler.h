@@ -13,7 +13,10 @@ public:
 
     static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 
-    bool KeyPressed(char &c);
+    bool KeyPressed(const char &c);
+    static bool isTerminate();
+    
 private:
     static key ALL_KEYS[128];
+    static bool terminate;
 };

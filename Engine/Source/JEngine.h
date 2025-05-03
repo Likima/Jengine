@@ -13,7 +13,7 @@ class JEngine {
 public:
     JEngine();
     ~JEngine();
-
+    bool terminate = false;
 private:
     JWindow* jw = nullptr;
     Game* game;
@@ -22,4 +22,5 @@ private:
     game_state interpolate(game_state const & current, game_state const & previous, float alpha);
     void update(game_state * gs);
     void render(game_state const &gs);
+    bool handle_events();
 };

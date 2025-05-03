@@ -2,11 +2,11 @@
 
 class Game {
 public:
-    Game();
-    virtual ~Game();
-
-    virtual void update();
-    virtual void onStart();
+    Game(){}
+    virtual ~Game(){}
+    
+    virtual void update(){}
+    virtual void onStart(){}
 private:
 
 };

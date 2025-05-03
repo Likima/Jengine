@@ -11,7 +11,7 @@ ColorWave::~ColorWave() {
 }
 
 void ColorWave::update() {
-    std::cout<<":skull:"<<std::endl;
+    // std::cout<<":skull:"<<std::endl; // works!
 }
 
 void ColorWave::onStart() {
