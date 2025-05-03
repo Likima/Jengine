@@ -18,9 +18,7 @@ using namespace std::chrono_literals;
 // we use a fixed timestep of 1 / (60 fps) = 16 milliseconds
 constexpr std::chrono::nanoseconds timestep(16ms);
 
-struct game_state {
-  // this contains the state of your game, such as positions and velocities
-};
+
 
 bool handle_events() {
   // poll for events
@@ -28,15 +26,15 @@ bool handle_events() {
   return false; // true if the user wants to quit the game
 }
 
-void update(game_state *) {
-  // update game logic here
+void JEngine::update(game_state * gs) {
+  game->update();
 }
 
-void render(game_state const &) {
+void JEngine::render(game_state const &gs) {
   // render stuff here
 }
 
-game_state interpolate(game_state const & current, game_state const & previous, float alpha) {
+game_state JEngine::interpolate(game_state const & current, game_state const & previous, float alpha) {
   game_state interpolated_state;
 
   // interpolate between previous and current by alpha here

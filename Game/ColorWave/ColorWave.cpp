@@ -1,5 +1,7 @@
 #include "ColorWave.h"
 
+#include <iostream>
+
 ColorWave::ColorWave() {
 
 }
@@ -9,7 +11,7 @@ ColorWave::~ColorWave() {
 }
 
 void ColorWave::update() {
-
+    std::cout<<":skull:"<<std::endl;
 }
 
 void ColorWave::onStart() {
