@@ -9,7 +9,8 @@ project "UI"
 
    includedirs
    {
-      "Source"
+      "Source",
+      "../Engine/Source"
    }
 
    -- Add GLFW linkage for different platforms

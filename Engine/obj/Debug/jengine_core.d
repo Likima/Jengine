@@ -1,6 +1,6 @@
-obj/Debug/JEngine.o: Source/JEngine.cpp Source/JEngine.h \
-  ../UI/Source/UI_Core/ui_core.h ../UI/Source/JWindow.h \
-  Source/Dependancies/libs.h /usr/include/GL/glew.h \
+obj/Debug/jengine_core.o: Source/Engine_Core/jengine_core.cpp \
+  ../UI/Source/JWindow.h Source/Dependancies/libs.h \
+  /usr/include/GL/glew.h \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/cstddef \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/x86_64-linux-gnu/c++/11/bits/c++config.h \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/x86_64-linux-gnu/c++/11/bits/os_defines.h \
@@ -171,17 +171,8 @@ obj/Debug/JEngine.o: Source/JEngine.cpp Source/JEngine.h \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/bits/ostream.tcc \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/istream \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/bits/istream.tcc \
-  ../Game/Source/game.h Source/KeyHandler/KeyHandler.h \
-  Source/Renderer/Renderer.h ../Game/Source/Game_Core/game_core.h \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/chrono \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/ratio \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/limits \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/ctime \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/bits/parse_numbers.h
-
-Source/JEngine.h:
-
-../UI/Source/UI_Core/ui_core.h:
+  Source/JEngine.h ../UI/Source/UI_Core/ui_core.h ../Game/Source/game.h \
+  Source/KeyHandler/KeyHandler.h Source/Renderer/Renderer.h
 
 ../UI/Source/JWindow.h:
 
@@ -557,20 +548,12 @@ Source/Dependancies/libs.h:
 
 /usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/bits/istream.tcc:
 
+Source/JEngine.h:
+
+../UI/Source/UI_Core/ui_core.h:
+
 ../Game/Source/game.h:
 
 Source/KeyHandler/KeyHandler.h:
 
 Source/Renderer/Renderer.h:
-
-../Game/Source/Game_Core/game_core.h:
-
-/usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/chrono:
-
-/usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/ratio:
-
-/usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/limits:
-
-/usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/ctime:
-
-/usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/bits/parse_numbers.h:

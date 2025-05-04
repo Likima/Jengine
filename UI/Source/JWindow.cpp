@@ -2,8 +2,7 @@
 
 #include <iostream>
 
-#include <GLFW/glfw3.h>
-
+#include "Dependancies/libs.h"
 
 JWindow::~JWindow() {
     if(window) glfwDestroyWindow(window);
