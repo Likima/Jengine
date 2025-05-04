@@ -11,14 +11,13 @@
 JEngine::~JEngine(){
     delete jw;
     delete game;
+    delete renderer;
 }
 
 using namespace std::chrono_literals;
 
 // we use a fixed timestep of 1 / (60 fps) = 16 milliseconds
 constexpr std::chrono::nanoseconds timestep(16ms);
-
-
 
 bool JEngine::handle_events() {
   // poll for events
@@ -31,7 +30,7 @@ void JEngine::update(game_state * gs) {
 }
 
 void JEngine::render(game_state const &gs) {
-  // render stuff here
+  renderer->drawShape();
 }
 
 game_state JEngine::interpolate(game_state const & current, game_state const & previous, float alpha) {
@@ -51,6 +50,7 @@ JEngine::JEngine() {
     jw->CreateWindow();
 
     this->kh = new KeyHandler(jw->getWindow());
+    this->renderer = new Renderer(jw->getWindow());
 
     using clock = std::chrono::high_resolution_clock;
 

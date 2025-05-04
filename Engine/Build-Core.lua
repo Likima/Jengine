@@ -1,46 +1,50 @@
 project "Engine"
-   kind "StaticLib"
-   language "C++"
-   cppdialect "C++17"
-   targetdir "Binaries/%{cfg.buildcfg}"
-   staticruntime "off"
+     kind "StaticLib"
+     language "C++"
+     cppdialect "C++17"
+     targetdir "Binaries/%{cfg.buildcfg}"
+     staticruntime "off"
 
-   files { "Source/**.h", "Source/**.cpp" }
+     files { "Source/**.h", "Source/**.cpp" }
 
-   includedirs
-   {
-      "Source",
-      "../UI/Source",
-      "../Game/Source",       -- Add Game/Source
-      "../Game/ColorWave"     -- Add ColorWave directory too
-   }
+     includedirs
+     {
+          "Source",
+          "../UI/Source",
+          "../Game/Source",
+          "../Game/ColorWave"
+     }
 
-   links
-   {
-      "UI",
-      "Game"
-   }
-   
-   targetdir ("../Binaries/" .. OutputDir .. "/%{prj.name}")
-   objdir ("../Binaries/Intermediates/" .. OutputDir .. "/%{prj.name}")
+     links
+     {
+         "UI",
+         "Game"
+     }
+    
+     filter "system:linux"
+         links { "GL", "GLEW", "glfw" }
+         
+     filter "system:windows"
+         links { "opengl32", "glew32", "glfw3" }
+         
+     filter "system:macosx"
+         links { "OpenGL.framework", "GLEW", "glfw" }
+    filter "system:macosx"
+         links { "OpenGL.framework", "glfw" }  -- Link OpenGL and GLFW on macOS
 
-   filter "system:windows"
-       systemversion "latest"
-       defines { }
+    filter "configurations:Debug"
+         defines { "DEBUG" }
+         runtime "Debug"
+         symbols "On"
 
-   filter "configurations:Debug"
-       defines { "DEBUG" }
-       runtime "Debug"
-       symbols "On"
+    filter "configurations:Release"
+         defines { "RELEASE" }
+         runtime "Release"
+         optimize "On"
+         symbols "On"
 
-   filter "configurations:Release"
-       defines { "RELEASE" }
-       runtime "Release"
-       optimize "On"
-       symbols "On"
-
-   filter "configurations:Dist"
-       defines { "DIST" }
-       runtime "Release"
-       optimize "On"
-       symbols "Off"
+    filter "configurations:Dist"
+         defines { "DIST" }
+         runtime "Release"
+         optimize "On"
+         symbols "Off"
