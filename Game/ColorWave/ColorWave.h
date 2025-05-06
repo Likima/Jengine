@@ -1,5 +1,8 @@
 #include "game.h" // TODO <- get rid of this later. Make sure no unnecessary includes
 
+#include <vector>
+#include "Entities/Entity.hpp"
+
 class ColorWave: public Game {
 public:
     ColorWave();
@@ -7,6 +10,7 @@ public:
 
     void update() override;
     void onStart() override;
-private:
 
+private:
+    KeyHandler* kh;    
 };

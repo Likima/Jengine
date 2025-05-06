@@ -19,9 +19,13 @@ using namespace std::chrono_literals;
 // we use a fixed timestep of 1 / (60 fps) = 16 milliseconds
 constexpr std::chrono::nanoseconds timestep(16ms);
 
-bool JEngine::handle_events() {
-  // poll for events
+void JEngine::onStart() {
+  game->onStart();
+  for(Entity& e: game->getEntityList()) 
+    e.onStart();
+}
 
+bool JEngine::handle_events() {
   return kh->isTerminate(); // true if the user wants to quit the game
 }
 
@@ -52,6 +56,8 @@ JEngine::JEngine() {
     this->kh = new KeyHandler(jw->getWindow());
     this->renderer = new Renderer(jw->getWindow());
 
+    game->attachKeyHandler(kh);
+
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
@@ -81,10 +87,9 @@ JEngine::JEngine() {
     game_state current_state;
     game_state previous_state;
   
+    onStart();
+    
     while(!terminate) {
-
-
-
       glfwPollEvents(); // key input
 
       auto delta_time = clock::now() - time_start;

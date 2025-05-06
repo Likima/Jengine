@@ -2,6 +2,8 @@
 #include <array>
 #include <string>
 
+#include "KeyHandler.h"
+
 class Entity
 {
 public:
@@ -15,10 +17,14 @@ public:
     virtual void render();
     virtual void onStart();
 
+    void attachKeyHandler(KeyHandler* kh) {this->kh = kh;}
+
     std::pair<float, float> getXY() {return std::make_pair((x_left+x_right)/2,(y_up+y_down)/2);}
 private:
     float x_left;
     float y_up;
     float x_right;
     float y_down;
+
+    KeyHandler* kh;
 };
