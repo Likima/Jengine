@@ -18,7 +18,7 @@ project "Engine"
      links
      {
          "UI",
-         "Game"
+         "Game",
      }
     
      filter "system:linux"

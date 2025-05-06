@@ -5,13 +5,6 @@
 Renderer::Renderer(GLFWwindow* jw)
 {
     this->jw = jw;
-
-    // GLenum err = glewInit();
-    // if (err != GLEW_OK)
-    // {
-    //     fprintf(stderr, "GLEW initialization failed: %s\n", glewGetErrorString(err));
-    // }
-    load_gl_extensions();
 }
 
 Renderer::~Renderer()
