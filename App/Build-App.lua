@@ -28,13 +28,13 @@ project "App"
    
    -- Add GLFW linkage for the executable
    filter "system:linux"
-       links { "glfw", "GL", "X11", "pthread", "dl" }
+       links { "glfw", "GL", "GLEW", "X11", "pthread", "dl" }
    
    filter "system:windows"
-       links { "glfw3", "opengl32" }
+       links { "glfw3", "glew32", "opengl32" }
        
    filter "system:macosx"
-       links { "glfw3", "Cocoa.framework", "OpenGL.framework", "IOKit.framework", "CoreVideo.framework" }
+       links { "glfw3", "GLEW", "Cocoa.framework", "OpenGL.framework", "IOKit.framework", "CoreVideo.framework" }
    
    filter {}  -- Reset filter
 

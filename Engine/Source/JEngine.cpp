@@ -55,7 +55,6 @@ JEngine::JEngine() {
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-    // glfwWindowHint(GLFW_DECORATED, false); // <--- For Removing window border. Deal with in the future?
     glfwWindowHint(GLFW_FLOATING, true);
 
     glfwMakeContextCurrent(jw->getWindow());
@@ -68,9 +67,9 @@ JEngine::JEngine() {
         return;
     }
 
-    if (!initGLEW())
-    {
-        std::cout << "Error Initializing GLEW" << std::endl;
+    glewExperimental = GL_TRUE;
+    if (glewInit() != GLEW_OK) {
+        std::cerr << "Failed to initialize GLEW" << std::endl;
     }
 
     using clock = std::chrono::high_resolution_clock;

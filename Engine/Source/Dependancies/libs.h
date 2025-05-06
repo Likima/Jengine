@@ -6,15 +6,6 @@
 
 #include <iostream>
 
-bool initGLEW() {
-    glewExperimental = GL_TRUE;
-    if (glewInit() != GLEW_OK) {
-        std::cerr << "Failed to initialize GLEW" << std::endl;
-        return false;
-    }
-    return true;
-}
-
 static void load_gl_extensions(void)
 {
     glCreateShader = (PFNGLCREATESHADERPROC)glfwGetProcAddress("glCreateShader");
