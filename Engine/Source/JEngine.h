@@ -4,6 +4,7 @@
 #include "game.h"
 #include "KeyHandler/KeyHandler.h"
 #include "Renderer/Renderer.h"
+#include "Entities/Entity.hpp"
 
 struct game_state {
     // this contains the state of your game, such as positions and velocities

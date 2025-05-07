@@ -5,12 +5,19 @@ project "Game"
    targetdir "Binaries/%{cfg.buildcfg}"
    staticruntime "off"
 
-   files { "Source/**.h", "Source/**.cpp", "ColorWave/**.h", "ColorWave/**.cpp" }  -- Include ColorWave files
-
+   files { 
+    "Source/**.h", 
+    "Source/**.hpp",
+    "Source/**.cpp",
+    "ColorWave/**.h",
+    "ColorWave/**.hpp",
+    "ColorWave/**.cpp"
+    }   
    includedirs
    {
       "Source",
-      "ColorWave"
+      "ColorWave",
+      "../Engine/Source"
    }
 
    targetdir ("../Binaries/" .. OutputDir .. "/%{prj.name}")

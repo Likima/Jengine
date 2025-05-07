@@ -21,8 +21,8 @@ constexpr std::chrono::nanoseconds timestep(16ms);
 
 void JEngine::onStart() {
   game->onStart();
-  for(Entity& e: game->getEntityList()) 
-    e.onStart();
+  for(auto& e: game->getEntityList()) 
+    e->onStart();
 }
 
 bool JEngine::handle_events() {

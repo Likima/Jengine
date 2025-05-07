@@ -1,8 +1,9 @@
 #pragma once
 
 #include <vector>
+#include <memory>
 
-#include "KeyHandler.h"
+#include "KeyHandler/KeyHandler.h"
 #include "Entities/Entity.hpp"
 
 class Game {
@@ -14,9 +15,9 @@ public:
     virtual void onStart(){}
 
     void attachKeyHandler(KeyHandler* kh) { this->kh = kh; }
-    std::vector<Entity> getEntityList() { return EntityList; }
+    std::vector<std::unique_ptr<Entity>>& getEntityList() { return EntityList; }
 
 private:
     KeyHandler* kh;
-    std::vector<Entity> EntityList;
+    std::vector<std::unique_ptr<Entity>> EntityList;  // Change to store pointers
 };
