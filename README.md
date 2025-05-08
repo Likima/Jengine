@@ -69,6 +69,10 @@ chmod +x linux_run.sh
 Scripts\Setup-Windows.bat
 ```
 
+### Mac
+
+1. TBD - no access to mac computer rn lol
+
 2. Open the generated solution file in Visual Studio
 
 ## Project Components
@@ -86,7 +90,3 @@ Scripts\Setup-Windows.bat
 - Input handling
 - Game loop implementation
 - State management
-
-## License
-
-This project is licensed under the Unlicense - see the [UNLICENSE.txt](UNLICENSE.txt) file for details.

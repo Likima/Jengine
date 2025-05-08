@@ -16,12 +16,19 @@ public:
     Entity(float center_x, float center_y, float width, float height)
         : kh(nullptr)
     {
-        setCenterAndSize(center_x, center_y, width, height);
+        setCenterAndSize(center_x, center_y);
     }
 
+    virtual void update() = 0;
+    virtual void render(Renderer *r) = 0;
+    virtual void onStart() = 0;
+
     void setImgPath(std::string filepath) { this->filepath = filepath; }
-    void setCenterAndSize(float center_x, float center_y, float width, float height)
+    void setCenterAndSize(float center_x, float center_y)
     {
+        x_mid = center_x;
+        y_mid = center_y;
+
         float half_width = width / 2.0f;
         float half_height = height / 2.0f;
         x_left = center_x - half_width;
@@ -30,13 +37,13 @@ public:
         y_down = center_y + half_height;
     }
 
-    virtual void update() = 0;
-    virtual void render(Renderer *r) = 0;
-    virtual void onStart() = 0;
 
     void setSpeed(int speed) {
-        float normalized_speed;
         this->speed = ((float)(speed)*5.0f / ((float)(SCREEN_WIDTH)));
+    }
+
+    void setWidth(int width) {
+        this->width = ((float)(width)*5.0f / (float)(std::min(SCREEN_HEIGHT, SCREEN_WIDTH)));
     }
 
     // == Movement controls == //
@@ -80,6 +87,12 @@ protected:
     float y_up;
     float x_right;
     float y_down;
+
+    float width = 0.2f;
+    float height = 0.2f;
+
+    float x_mid = 0.0f;
+    float y_mid = 0.0f;
 
     float speed = 0.02f;
 

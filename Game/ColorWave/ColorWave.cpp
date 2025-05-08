@@ -36,13 +36,3 @@ void ColorWave::render()
         entity->render(rdr);
     }
 }
-
-/*
--- Goals --
-
-- utilize the engine to instantiate an initial ui.
-- utilize the engine to create a basic game loop
-
-...
-
-*/

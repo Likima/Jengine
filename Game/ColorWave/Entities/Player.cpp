@@ -50,6 +50,7 @@ void Player::update()
 void Player::onStart()
 {
     setSpeed(5);
+    setWidth(5);
 }
 
 void Player::render(Renderer *r)
