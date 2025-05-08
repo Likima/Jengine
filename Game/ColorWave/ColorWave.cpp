@@ -18,6 +18,12 @@ void ColorWave::onStart() {
     
 }
 
+void ColorWave::render() {
+    for(auto &entity : getEntityList()) {
+        entity->render();
+    }   
+}
+
 /*
 -- Goals --
 

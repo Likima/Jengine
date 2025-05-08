@@ -12,6 +12,7 @@ public:
     virtual ~Game(){}
     
     virtual void update(){}
+    virtual void render(){}
     virtual void onStart(){}
 
     void attachKeyHandler(KeyHandler* kh) { this->kh = kh; }
@@ -19,5 +20,5 @@ public:
 
 private:
     KeyHandler* kh;
-    std::vector<std::unique_ptr<Entity>> EntityList;  // Change to store pointers
+    std::vector<std::unique_ptr<Entity>> EntityList;  
 };

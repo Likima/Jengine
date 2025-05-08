@@ -29,4 +29,5 @@ private:
     float y_down;
 
     KeyHandler* kh;
+    bool onScreen;
 };

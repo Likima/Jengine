@@ -31,5 +31,6 @@ private:
     float y_down;
 
     std::string filepath;
+    bool onScreen = true;
 
 };

@@ -9,8 +9,10 @@ public:
     ~ColorWave() override;
 
     void update() override;
+    void render() override;
     void onStart() override;
 
 private:
     KeyHandler* kh;    
+    std::vector<std::unique_ptr<Entity>> EntityList;  
 };
