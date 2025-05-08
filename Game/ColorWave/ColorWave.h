@@ -3,7 +3,8 @@
 #include <vector>
 #include "Entities/Entity.hpp"
 
-class ColorWave: public Game {
+class ColorWave : public Game
+{
 public:
     ColorWave();
     ~ColorWave() override;
@@ -13,6 +14,6 @@ public:
     void onStart() override;
 
 private:
-    KeyHandler* kh;    
-    std::vector<std::unique_ptr<Entity>> EntityList;  
+    KeyHandler *kh;
+    // std::vector<std::unique_ptr<Entity>> EntityList;
 };

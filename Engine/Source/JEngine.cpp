@@ -34,7 +34,8 @@ void JEngine::update(game_state * gs) {
 }
 
 void JEngine::render(game_state const &gs) {
-  renderer->draw();
+  // renderer->draw();
+  game->render();
 }
 
 game_state JEngine::interpolate(game_state const & current, game_state const & previous, float alpha) {
@@ -57,6 +58,7 @@ JEngine::JEngine() {
     this->renderer = new Renderer(jw->getWindow());
 
     game->attachKeyHandler(kh);
+    game->attachWindow(jw->getWindow());
 
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);

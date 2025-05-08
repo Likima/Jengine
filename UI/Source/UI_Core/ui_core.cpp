@@ -10,6 +10,6 @@ namespace UI_Core {
     }
 
     JWindow* CreateJWindow() {
-        return new JWindow();  // Properly allocate a new JWindow
+        return new JWindow(); 
     }
 }

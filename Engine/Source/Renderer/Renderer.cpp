@@ -17,6 +17,31 @@ char* Renderer::fragmentSource = R"glsl(
     }
 )glsl";
 
+bool Renderer::initialize() {
+    int width, height;
+    glfwGetFramebufferSize(jw, &width, &height);
+    glViewport(0, 0, width, height);
+
+    glClear(GL_COLOR_BUFFER_BIT);
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+
+    glGenVertexArrays(1, &vao);
+    glBindVertexArray(vao);
+    return true;
+}
+
+bool Renderer::cleanup(GLuint &shaderProgram, GLuint &vertexShader, GLuint &fragmentShader, GLint &posAttrib) {
+    glDisableVertexAttribArray(posAttrib);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glDeleteBuffers(1, &vbo);
+    glBindVertexArray(0);
+    glDeleteVertexArrays(1, &vao);
+    glDeleteProgram(shaderProgram);
+    glDeleteShader(vertexShader);
+    glDeleteShader(fragmentShader);
+    return true;
+}
+
 Renderer::Renderer(GLFWwindow *jw) : jw(jw) {
     setShaderSource(vertexSource, fragmentSource);
 }
@@ -57,33 +82,23 @@ GLuint Renderer::createShaderProgram(GLuint vertexShader, GLuint fragmentShader)
     return program;
 }
 
-GLuint Renderer::setupGeometry() {
-    const float vertices[] = {
-        0.0f, 0.5f,
-        0.5f, -0.5f,
-        -0.5f, -0.5f
-    };
-
-    GLuint vbo;
+GLuint Renderer::setupGeometry(const float* vertices, size_t vertexCount) {
     glGenBuffers(1, &vbo);
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, vertexCount * sizeof(float), vertices, GL_STATIC_DRAW);
     return vbo;
 }
 
-void Renderer::draw(const char *vs, const char *fs) {
-    int width, height;
-    glfwGetFramebufferSize(jw, &width, &height);
-    glViewport(0, 0, width, height);
+void Renderer::draw(const float *vertices, size_t vertexCount) {
 
-    glClear(GL_COLOR_BUFFER_BIT);
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+    // example
+    // float vertices[] = {
+    //     -0.5f, -0.5f,
+    //      0.5f, -0.5f,
+    //      0.0f,  0.5f
+    // };
 
-    GLuint vao;
-    glGenVertexArrays(1, &vao);
-    glBindVertexArray(vao);
-
-    GLuint vbo = setupGeometry();
+    vbo = setupGeometry(vertices, vertexCount);
 
     GLuint vertexShader = createShader(GL_VERTEX_SHADER, vertexSource);
     GLuint fragmentShader = createShader(GL_FRAGMENT_SHADER, fragmentSource);
@@ -96,13 +111,5 @@ void Renderer::draw(const char *vs, const char *fs) {
 
     glDrawArrays(GL_TRIANGLES, 0, 3);
     glfwSwapBuffers(jw);
-
-    glDisableVertexAttribArray(posAttrib);
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-    glDeleteBuffers(1, &vbo);
-    glBindVertexArray(0);
-    glDeleteVertexArrays(1, &vao);
-    glDeleteProgram(shaderProgram);
-    glDeleteShader(vertexShader);
-    glDeleteShader(fragmentShader);
+    cleanup(shaderProgram, vertexShader, fragmentShader, posAttrib);
 }
