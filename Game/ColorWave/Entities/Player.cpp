@@ -19,9 +19,33 @@ char *fragmentSource = R"glsl(
 // called every frame update
 void Player::update()
 {
+    bool changed = false;
     if (kh->KeyPressed('D'))
     {
-        x_right += 0.1f;
+        x_right += 0.02f;
+        x_left += 0.02f;
+        changed = true;
+    }
+    if (kh->KeyPressed('A'))
+    {
+        x_right -= 0.02f;
+        x_left -= 0.02f;
+        changed = true;
+    }
+    if (kh->KeyPressed('W'))
+    {
+        y_up += 0.02f;
+        y_down += 0.02f;
+        changed = true;
+    }
+    if (kh->KeyPressed('S'))
+    {
+        y_up -= 0.02f;
+        y_down -= 0.02f;
+        changed = true;
+    }
+    if (changed)
+    {
         updateVertices();
     }
 }
