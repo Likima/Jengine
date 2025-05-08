@@ -34,7 +34,6 @@ void JEngine::update(game_state * gs) {
 }
 
 void JEngine::render(game_state const &gs) {
-  // renderer->draw();
   game->render();
 }
 

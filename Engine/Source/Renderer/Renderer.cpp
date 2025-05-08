@@ -31,6 +31,23 @@ bool Renderer::initialize()
     return true;
 }
 
+glm::mat4 Renderer::defineProjection()
+{
+    int width, height;
+    glfwGetFramebufferSize(jw, &width, &height);
+
+    float aspect = static_cast<float>(width) / height;
+
+    if (aspect > 1.0f)
+    {
+        return glm::ortho(-aspect, aspect, -1.0f, 1.0f, -1.0f, 1.0f);
+    }
+    else
+    {
+        float invAspect = 1.0f / aspect;
+        return glm::ortho(-1.0f, 1.0f, -invAspect, invAspect, -1.0f, 1.0f);
+    }
+}
 bool Renderer::cleanup(GLuint &shaderProgram, GLuint &vertexShader, GLuint &fragmentShader, GLint &posAttrib)
 {
     glDisableVertexAttribArray(posAttrib);
@@ -120,6 +137,11 @@ void Renderer::draw(const float *vertices, const int *indices, size_t vertexCoun
     GLuint fragmentShader = createShader(GL_FRAGMENT_SHADER, fragmentSource);
     GLuint shaderProgram = createShaderProgram(vertexShader, fragmentShader);
     glUseProgram(shaderProgram);
+
+    // Create and set projection matrix
+    glm::mat4 projection = defineProjection();
+    GLint projectionLoc = glGetUniformLocation(shaderProgram, "projection");
+    glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
 
     GLint posAttrib = glGetAttribLocation(shaderProgram, "position");
     glVertexAttribPointer(posAttrib, 2, GL_FLOAT, GL_FALSE, 0, 0);

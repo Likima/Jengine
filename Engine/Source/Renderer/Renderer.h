@@ -2,6 +2,10 @@
 
 #include "Dependancies/libs.h"
 
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
 class Renderer
 {
 public:
@@ -17,6 +21,9 @@ public:
     GLuint createShader(GLenum type, const char *source);
     GLuint createShaderProgram(GLuint vertexShader, GLuint fragmentShader);
     GLuint setupGeometry(const float *vertices, size_t vertexCount);
+
+    glm::mat4 defineProjection();
+
 
     void draw(const float *vertices, const int *indices, size_t vertexCount); // TODO define a parameter such that it will draw it
 
