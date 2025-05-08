@@ -23,26 +23,22 @@ void Player::update()
     bool changed = false;
     if (kh->KeyPressed('D'))
     {
-        x_right += 0.02f;
-        x_left += 0.02f;
+        moveRight();
         changed = true;
     }
     if (kh->KeyPressed('A'))
     {
-        x_right -= 0.02f;
-        x_left -= 0.02f;
+        moveLeft();
         changed = true;
     }
     if (kh->KeyPressed('W'))
     {
-        y_up += 0.02f;
-        y_down += 0.02f;
+        moveUp();
         changed = true;
     }
     if (kh->KeyPressed('S'))
     {
-        y_up -= 0.02f;
-        y_down -= 0.02f;
+        moveDown();
         changed = true;
     }
     if (changed)
@@ -53,11 +49,11 @@ void Player::update()
 
 void Player::onStart()
 {
+    setSpeed(5);
 }
 
 void Player::render(Renderer *r)
 {
-    // Bind the VAO and draw
     std::cout << "Rendering..." << std::endl;
     r->setShaderSource(vertexSource, fragmentSource);
     r->draw(vertices.data(), indices.data(), vertices.size());

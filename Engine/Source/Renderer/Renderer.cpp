@@ -17,7 +17,7 @@ char *Renderer::fragmentSource = R"glsl(
     }
 )glsl";
 
-bool Renderer::initialize()
+void Renderer::initialize()
 {
     int width, height;
     glfwGetFramebufferSize(jw, &width, &height);
@@ -28,10 +28,9 @@ bool Renderer::initialize()
 
     glGenVertexArrays(1, &vao);
     glBindVertexArray(vao);
-    return true;
 }
 
-glm::mat4 Renderer::defineProjection()
+glm::mat4 Renderer::normalizeProjection()
 {
     int width, height;
     glfwGetFramebufferSize(jw, &width, &height);
@@ -48,7 +47,8 @@ glm::mat4 Renderer::defineProjection()
         return glm::ortho(-1.0f, 1.0f, -invAspect, invAspect, -1.0f, 1.0f);
     }
 }
-bool Renderer::cleanup(GLuint &shaderProgram, GLuint &vertexShader, GLuint &fragmentShader, GLint &posAttrib)
+
+void Renderer::cleanup(GLuint &shaderProgram, GLuint &vertexShader, GLuint &fragmentShader, GLint &posAttrib)
 {
     glDisableVertexAttribArray(posAttrib);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -58,7 +58,6 @@ bool Renderer::cleanup(GLuint &shaderProgram, GLuint &vertexShader, GLuint &frag
     glDeleteProgram(shaderProgram);
     glDeleteShader(vertexShader);
     glDeleteShader(fragmentShader);
-    return true;
 }
 
 Renderer::Renderer(GLFWwindow *jw) : jw(jw)
@@ -122,12 +121,10 @@ void Renderer::draw(const float *vertices, const int *indices, size_t vertexCoun
     glGenVertexArrays(1, &vao);
     glBindVertexArray(vao);
 
-    // Create and bind vertex buffer
     glGenBuffers(1, &vbo);
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
     glBufferData(GL_ARRAY_BUFFER, vertexCount * sizeof(float), vertices, GL_STATIC_DRAW);
 
-    // Create and bind element buffer
     GLuint ebo;
     glGenBuffers(1, &ebo);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
@@ -138,8 +135,7 @@ void Renderer::draw(const float *vertices, const int *indices, size_t vertexCoun
     GLuint shaderProgram = createShaderProgram(vertexShader, fragmentShader);
     glUseProgram(shaderProgram);
 
-    // Create and set projection matrix
-    glm::mat4 projection = defineProjection();
+    glm::mat4 projection = normalizeProjection();
     GLint projectionLoc = glGetUniformLocation(shaderProgram, "projection");
     glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
 
@@ -147,12 +143,10 @@ void Renderer::draw(const float *vertices, const int *indices, size_t vertexCoun
     glVertexAttribPointer(posAttrib, 2, GL_FLOAT, GL_FALSE, 0, 0);
     glEnableVertexAttribArray(posAttrib);
 
-    // Draw using indices
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
     glfwSwapBuffers(jw);
 
-    // Cleanup
     glDeleteBuffers(1, &ebo);
     cleanup(shaderProgram, vertexShader, fragmentShader, posAttrib);
 }

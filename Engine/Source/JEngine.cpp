@@ -8,6 +8,9 @@
 #include <iostream>
 #include <chrono>
 
+int SCREEN_HEIGHT = 600;
+int SCREEN_WIDTH = 900;
+
 JEngine::~JEngine(){
     delete jw;
     delete game;
@@ -16,7 +19,6 @@ JEngine::~JEngine(){
 
 using namespace std::chrono_literals;
 
-// we use a fixed timestep of 1 / (60 fps) = 16 milliseconds
 constexpr std::chrono::nanoseconds timestep(16ms);
 
 void JEngine::onStart() {
@@ -59,6 +61,9 @@ JEngine::JEngine() {
     game->attachKeyHandler(kh);
     game->attachWindow(jw->getWindow());
 
+    glfwGetFramebufferSize(jw->getWindow(), &SCREEN_WIDTH, &SCREEN_HEIGHT);
+
+
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
@@ -99,15 +104,13 @@ JEngine::JEngine() {
   
       terminate = handle_events();
   
-      // update game logic as lag permits
       while(lag >= timestep) {
         lag -= timestep;
   
         previous_state = current_state;
-        update(&current_state); // update at a fixed rate each time
+        update(&current_state); 
       }
   
-      // calculate how close or far we are from the next timestep
       auto alpha = (float) lag.count() / timestep.count();
       auto interpolated_state = interpolate(current_state, previous_state, alpha);
   

@@ -24,9 +24,8 @@ const char QUIT_KEY = 'Q';
 KeyHandler::KeyHandler(GLFWwindow *window)
 {
     for (int i = 0; i <= 127; i++)
-    {
         ALL_KEYS[i] = {static_cast<char>(i), false};
-    }
+    
     terminate = static_cast<bool>(false);
     glfwSetKeyCallback(window, KeyHandler::key_callback);
 }
@@ -48,13 +47,7 @@ void KeyHandler::key_callback(GLFWwindow *window, int key, int scancode, int act
 bool KeyHandler::KeyPressed(const char &c)
 {
     if (static_cast<unsigned char>(c) >= 128)
-    {
         std::cout << "Character support for character: " << c << " is not yet supported!" << std::endl;
-    }
-    return (ALL_KEYS[static_cast<unsigned char>(c)].isPressed);
-}
-
-bool KeyHandler::isTerminate()
-{
-    return terminate;
+    
+        return (ALL_KEYS[static_cast<unsigned char>(c)].isPressed);
 }

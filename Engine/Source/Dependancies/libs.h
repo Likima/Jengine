@@ -6,6 +6,9 @@
 
 #include <iostream>
 
+extern int SCREEN_WIDTH;
+extern int SCREEN_HEIGHT;
+
 static void load_gl_extensions(void)
 {
     glCreateShader = (PFNGLCREATESHADERPROC)glfwGetProcAddress("glCreateShader");

@@ -15,5 +15,4 @@ public:
 
 private:
     KeyHandler *kh;
-    // std::vector<std::unique_ptr<Entity>> EntityList;
 };

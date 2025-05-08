@@ -4,6 +4,7 @@
 
 #include "KeyHandler/KeyHandler.h"
 #include "Renderer/Renderer.h"
+#include "Dependancies/libs.h"
 
 class Entity
 {
@@ -33,6 +34,30 @@ public:
     virtual void render(Renderer *r) = 0;
     virtual void onStart() = 0;
 
+    void setSpeed(int speed) {
+        float normalized_speed;
+        this->speed = ((float)(speed)*5.0f / ((float)(SCREEN_WIDTH)));
+    }
+
+    // == Movement controls == //
+    void moveRight() {
+        x_left+=speed;
+        x_right+=speed;
+    }
+    void moveLeft() {
+        x_left-=speed;
+        x_right-=speed;
+    }
+    void moveUp() {
+        y_up += speed;
+        y_down +=speed;
+    }
+    void moveDown() {
+        y_up -=speed;
+        y_down -=speed;
+    }
+    // == / == //
+
     void updateVertices()
     {
         vertices = {
@@ -50,13 +75,13 @@ public:
 
     void attachKeyHandler(KeyHandler *kh) { this->kh = kh; }
 
-    std::pair<float, float> getXY() { return std::make_pair((x_left + x_right) / 2, (y_up + y_down) / 2); }
-
 protected:
     float x_left;
     float y_up;
     float x_right;
     float y_down;
+
+    float speed = 0.02f;
 
     std::string filepath;
     KeyHandler *kh;

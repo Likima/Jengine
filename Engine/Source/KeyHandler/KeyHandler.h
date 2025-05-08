@@ -14,7 +14,7 @@ public:
     static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 
     bool KeyPressed(const char &c);
-    static bool isTerminate();
+    static bool isTerminate() { return terminate; }
     
 private:
     static key ALL_KEYS[128];
