@@ -21,7 +21,8 @@ void Player::update()
 {
     if(kh->KeyPressed('D')) {
         std::cout<<"He"<<std::endl;
-        x_right+=1.0f;
+        x_right+=0.1f;
+        setVertices();
     }
 }
 

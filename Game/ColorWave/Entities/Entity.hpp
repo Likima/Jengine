@@ -33,6 +33,15 @@ public:
     virtual void render(Renderer* r) = 0;
     virtual void onStart() = 0;
 
+    void setVertices() {
+        vertices = {
+            x_left, y_up,    // top left
+            x_right, y_up,   // top right
+            x_right, y_down, // bottom right
+            x_left, y_down   // bottom left
+        };
+    }
+
     void attachKeyHandler(KeyHandler *kh) { this->kh = kh; }
 
     std::pair<float, float> getXY() { return std::make_pair((x_left + x_right) / 2, (y_up + y_down) / 2); }
