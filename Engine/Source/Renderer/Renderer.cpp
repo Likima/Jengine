@@ -1,7 +1,7 @@
 #include "Renderer.h"
 #include <iostream>
 
-const char *vertexSource = R"glsl(
+char* Renderer::vertexSource = R"glsl(
     #version 150 core
     in vec2 position;
     void main() {
@@ -9,7 +9,7 @@ const char *vertexSource = R"glsl(
     }
 )glsl";
 
-const char *fragmentSource = R"glsl(
+char* Renderer::fragmentSource = R"glsl(
     #version 150 core
     out vec4 outColor;
     void main() {
@@ -17,8 +17,13 @@ const char *fragmentSource = R"glsl(
     }
 )glsl";
 
-Renderer::Renderer(GLFWwindow *jw) : jw(jw) {}
-Renderer::~Renderer() {}
+Renderer::Renderer(GLFWwindow *jw) : jw(jw) {
+    setShaderSource(vertexSource, fragmentSource);
+}
+
+Renderer::~Renderer() {
+    setShaderSource(vertexSource, fragmentSource);
+}
 
 GLuint Renderer::createShader(GLenum type, const char* source) {
     GLuint shader = glCreateShader(type);
@@ -66,7 +71,7 @@ GLuint Renderer::setupGeometry() {
     return vbo;
 }
 
-void Renderer::drawShape() {
+void Renderer::draw(const char *vs, const char *fs) {
     int width, height;
     glfwGetFramebufferSize(jw, &width, &height);
     glViewport(0, 0, width, height);

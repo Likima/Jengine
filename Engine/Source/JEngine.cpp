@@ -34,7 +34,7 @@ void JEngine::update(game_state * gs) {
 }
 
 void JEngine::render(game_state const &gs) {
-  renderer->drawShape();
+  renderer->draw();
 }
 
 game_state JEngine::interpolate(game_state const & current, game_state const & previous, float alpha) {
