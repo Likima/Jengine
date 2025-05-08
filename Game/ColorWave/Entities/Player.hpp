@@ -9,13 +9,13 @@ public:
     Player()
     {
         setCenterAndSize(0.0f, 0.0f, 0.2f, 0.2f); // Creates a 0.2x0.2 square at center
-        setVertices(); // This will update vertices using inherited coordinates
+        updateVertices(); // This will update vertices using inherited coordinates
     }
 
     Player(float x_left, float x_right, float y_up, float y_down)
         : Entity(x_left, x_right, y_up, y_down) 
     {
-        setVertices();
+        updateVertices();
     }
 
     ~Player() override {};

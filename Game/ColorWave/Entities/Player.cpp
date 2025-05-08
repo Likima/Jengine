@@ -19,22 +19,21 @@ char *fragmentSource = R"glsl(
 // called every frame update
 void Player::update()
 {
-    if(kh->KeyPressed('D')) {
-        std::cout<<"He"<<std::endl;
-        x_right+=0.1f;
-        setVertices();
+    if (kh->KeyPressed('D'))
+    {
+        x_right += 0.1f;
+        updateVertices();
     }
 }
 
 void Player::onStart()
 {
-
 }
 
-void Player::render(Renderer* r)
+void Player::render(Renderer *r)
 {
     // Bind the VAO and draw
     std::cout << "Rendering..." << std::endl;
     r->setShaderSource(vertexSource, fragmentSource);
-    r->draw(vertices.data(), 8);
+    r->draw(vertices.data(), indices.data(), vertices.size()); 
 }

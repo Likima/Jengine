@@ -30,15 +30,21 @@ public:
     }
 
     virtual void update() = 0;
-    virtual void render(Renderer* r) = 0;
+    virtual void render(Renderer *r) = 0;
     virtual void onStart() = 0;
 
-    void setVertices() {
+    void updateVertices()
+    {
         vertices = {
-            x_left, y_up,    // top left
-            x_right, y_up,   // top right
-            x_right, y_down, // bottom right
-            x_left, y_down   // bottom left
+            x_left, y_up,    // 0: top left
+            x_right, y_up,   // 1: top right
+            x_right, y_down, // 2: bottom right
+            x_left, y_down   // 3: bottom left
+        };
+
+        indices = {
+            0, 1, 2, // first triangle
+            2, 3, 0  // second triangle
         };
     }
 
@@ -56,5 +62,6 @@ protected:
     KeyHandler *kh;
     bool onScreen;
 
-    std::array<float,8> vertices;
+    std::vector<float> vertices;
+    std::vector<int> indices;
 };
