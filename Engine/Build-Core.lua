@@ -5,6 +5,10 @@ project "Engine"
      targetdir "Binaries/%{cfg.buildcfg}"
      staticruntime "off"
 
+     defines {
+          "PROJECT_ROOT=\"" .. os.getcwd() .. "\"",
+      }
+
      files { "Source/**.h", "Source/**.cpp" }
 
      includedirs
@@ -12,7 +16,8 @@ project "Engine"
           "Source",
           "../UI/Source",
           "../Game/Source",
-          "../Game/ColorWave"
+          "../Game/ColorWave",
+          "../Core/Source"
      }
 
      links
@@ -20,6 +25,7 @@ project "Engine"
          "UI",
          "Game",
      }
+
     
      filter "system:linux"
          links { "GL", "GLEW", "glfw" }

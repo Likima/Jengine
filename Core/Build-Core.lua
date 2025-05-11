@@ -5,7 +5,8 @@ project "Core"
    targetdir "Binaries/%{cfg.buildcfg}"
    staticruntime "off"
 
-   files { "Source/**.h", "Source/**.cpp" }
+   files { "Source/**.h", "Source/**.cpp", "Source/ShaderLib/**.h",
+          "Source/ShaderLib/**.cpp"  }
 
    includedirs
    {

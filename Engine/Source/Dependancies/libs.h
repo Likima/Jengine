@@ -5,6 +5,9 @@
 #include <GLFW/glfw3.h>
 
 #include <iostream>
+#include <string>
+
+#include "ShaderLib/ShaderLib.h"
 
 extern int SCREEN_WIDTH;
 extern int SCREEN_HEIGHT;
