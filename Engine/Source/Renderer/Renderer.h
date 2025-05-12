@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Dependancies/libs.h"
+#include "Dependancies/ShaderLib.h"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>

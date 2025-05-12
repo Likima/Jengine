@@ -1,0 +1,157 @@
+#include "ShaderLib.h"
+#include <iostream>
+
+namespace JShader
+{
+    const char *DEFAULT_VERTEX_SHADER = R"glsl(
+        #version 330 core
+        layout (location = 0) in vec2 position;
+        uniform mat4 projection;
+        void main() {
+            gl_Position = projection * vec4(position, 0.0, 1.0);
+        }
+    )glsl";
+
+    const char *DEFAULT_FRAGMENT_SHADER = R"glsl(
+        #version 330 core
+        out vec4 FragColor;
+        void main() {
+            FragColor = vec4(1.0, 1.0, 1.0, 1.0);
+        }
+    )glsl";
+
+    char *slurp_file_into_malloced_cstr(const char *file_path)
+    {
+        FILE *f = NULL;
+        char *buffer = NULL;
+        long size = 0;
+
+        f = fopen(file_path, "r");
+        if (f == NULL)
+        {
+            goto fail;
+        }
+        if (fseek(f, 0, SEEK_END) < 0)
+        {
+            goto fail;
+        }
+
+        size = ftell(f);
+        if (size < 0)
+        {
+            goto fail;
+        }
+
+        buffer = (char *)malloc(size + 1);
+        if (buffer == NULL)
+        {
+            goto fail;
+        }
+
+        if (fseek(f, 0, SEEK_SET) < 0)
+        {
+            goto fail;
+        }
+
+        fread(buffer, 1, size, f);
+        if (ferror(f))
+        {
+            goto fail;
+        }
+
+        buffer[size] = '\0';
+
+        if (f)
+        {
+            fclose(f);
+            errno = 0;
+        }
+        return buffer;
+
+    fail:
+        if (f)
+        {
+            int saved_errno = errno;
+            fclose(f);
+            errno = saved_errno;
+        }
+        if (buffer)
+        {
+            free(buffer);
+        }
+        return NULL;
+    }
+
+    bool compileShaderFromSource(const GLchar *source, GLenum type, GLuint *shader)
+    {
+        *shader = glCreateShader(type);
+        glShaderSource(*shader, 1, &source, NULL);
+        glCompileShader(*shader);
+
+        GLint success = 0;
+        glGetShaderiv(*shader, GL_COMPILE_STATUS, &success);
+        if (!success)
+        {
+            char infoLog[512];
+            glGetShaderInfoLog(*shader, 512, NULL, infoLog);
+            std::cerr << "ERROR::SHADER::COMPILATION_FAILED\n"
+                      << infoLog << std::endl;
+            return false;
+        }
+        return true;
+    }
+
+    bool compileShader(const char *filePath, GLenum type, GLuint *shader)
+    {
+        char *slurped_file = slurp_file_into_malloced_cstr(filePath);
+        if (!slurped_file)
+        {
+            std::cerr << "Failed to read file: " << filePath << std::endl;
+            return false;
+        }
+
+        bool compiled = compileShaderFromSource(slurped_file, type, shader);
+        if (!compiled)
+        {
+            std::cerr << "Failed to compile shader" << std::endl;
+        }
+
+        free(slurped_file);
+        return compiled;
+    }
+
+    bool createShaderProgram(GLuint vert_shader, GLuint frag_shader, GLuint *program)
+    {
+        *program = glCreateProgram();
+
+        glAttachShader(*program, vert_shader);
+        glAttachShader(*program, frag_shader);
+        glLinkProgram(*program);
+
+        GLint success;
+        glGetProgramiv(*program, GL_LINK_STATUS, &success);
+        if (!success)
+        {
+            char infoLog[512];
+            glGetProgramInfoLog(*program, 512, nullptr, infoLog);
+            std::cerr << "ERROR::SHADER::PROGRAM::LINKING_FAILED\n"
+                      << infoLog << std::endl;
+            return false;
+        }
+
+        glDeleteShader(vert_shader);
+        glDeleteShader(frag_shader);
+
+        return true;
+    }
+
+    bool loadShaderFromFile(const char *shaderName, GLenum type, GLuint *shader)
+    {
+        std::string fullPath = shaderName;
+        return compileShader(fullPath.c_str(), type, shader);
+    }
+
+    void DeleteShader(GLuint shader) {
+        glDeleteProgram(shader);
+    }
+}
