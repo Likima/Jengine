@@ -50,10 +50,10 @@ void Player::render(Renderer *r) {
   std::cout << "Rendering..." << std::endl;
 
   GLuint vertexShader, fragmentShader, shaderProgram;
-  loadShaderFromFile("player_vert.glsl", GL_VERTEX_SHADER, &vertexShader);
-  loadShaderFromFile("player_frag.glsl", GL_FRAGMENT_SHADER, &fragmentShader);
-  createShaderProgram(vertexShader, fragmentShader, &shaderProgram);
+  // loadShaderFromFile(vertexSource, GL_VERTEX_SHADER, &vertexShader);
+  // loadShaderFromFile(fragmentSource, GL_FRAGMENT_SHADER, &fragmentShader);
+  // createShaderProgram(vertexShader, fragmentShader, &shaderProgram);
 
-  // r->setShaderSource(vertexSource, fragmentSource);
+  r->setShaderSource(vertexSource, fragmentSource);
   r->draw(vertices.data(), indices.data(), vertices.size());
 }

@@ -13,8 +13,8 @@
 extern int SCREEN_WIDTH;
 extern int SCREEN_HEIGHT;
 
-const std::string PROJECT_ROOT =
-    std::string(__FILE__).substr(0, std::string(__FILE__).find("Engine"));
+// const std::string PROJECT_ROOT =
+//    std::string(__FILE__).substr(0, std::string(__FILE__).find("Engine"));
 
 static void load_gl_extensions(void) {
   glCreateShader = (PFNGLCREATESHADERPROC)glfwGetProcAddress("glCreateShader");

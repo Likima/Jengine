@@ -16,6 +16,7 @@ char *Renderer::fragmentSource = R"glsl(
     void main() {
         outColor = vec4(1.0, 1.0, 1.0, 1.0);
     }
+)glsl";
 
 void Renderer::initialize() {
   int width, height;
@@ -70,7 +71,7 @@ GLuint Renderer::createShader(GLenum type, const char *source) {
 // @deprecated
 GLuint Renderer::createShaderProgram(GLuint vertexShader,
                                      GLuint fragmentShader) {
-  return JShader::createShaderProgram(vertexShader, framentShader);
+  return JShader::createShaderProgram(vertexShader, fragmentShader);
 }
 
 GLuint Renderer::setupGeometry(const float *vertices, size_t vertexCount) {
@@ -99,15 +100,15 @@ void Renderer::draw(const float *vertices, const int *indices,
 
   JShader::createShader(GL_VERTEX_SHADER, vertexSource);
   JShader::createShader(GL_FRAGMENT_SHADER, fragmentSource);
-  JShader::createShaderProgram(vertexShader, fragmentShader);
+  JShader::createShaderProgram(JShader::vertexShader, JShader::fragShader);
 
   glUseProgram(JShader::program);
 
   glm::mat4 projection = normalizeProjection();
-  GLint projectionLoc = glGetUniformLocation(shaderProgram, "projection");
+  GLint projectionLoc = glGetUniformLocation(JShader::program, "projection");
   glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
 
-  GLint posAttrib = glGetAttribLocation(shaderProgram, "position");
+  GLint posAttrib = glGetAttribLocation(JShader::program, "position");
   glVertexAttribPointer(posAttrib, 2, GL_FLOAT, GL_FALSE, 0, 0);
   glEnableVertexAttribArray(posAttrib);
 
@@ -116,4 +117,6 @@ void Renderer::draw(const float *vertices, const int *indices,
   glfwSwapBuffers(jw);
 
   glDeleteBuffers(1, &ebo);
-  cleanup(shaderProgram, vertexShader, fragmentShader, posAttrib);
+  cleanup(JShader::program, JShader::vertexShader, JShader::fragShader,
+          posAttrib);
+}

@@ -12,7 +12,7 @@
 int SCREEN_HEIGHT = 600;
 int SCREEN_WIDTH = 900;
 
-std::string JEngine::rootPath = "";
+// std::string JEngine::rootPath = "";
 
 JEngine::~JEngine() {
   delete jw;
@@ -23,8 +23,6 @@ JEngine::~JEngine() {
 using namespace std::chrono_literals;
 
 constexpr std::chrono::nanoseconds timestep(16ms);
-
-JEngine::JEngine() { setRootPath(PROJECT_ROOT); }
 
 void JEngine::onStart() {
   game->onStart();
@@ -50,6 +48,8 @@ game_state JEngine::interpolate(game_state const &current,
 }
 
 JEngine::JEngine() {
+
+  // setRootPath(PROJECT_ROOT);
 
   game = Game_Core::getGame();
 
