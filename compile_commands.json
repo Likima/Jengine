@@ -1,0 +1,113 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/clang++",
+      "-DDEBUG",
+      "-ISource",
+      "-I../Engine/Source",
+      "-m64",
+      "-g",
+      "-std=c++20",
+      "-c",
+      "-o",
+      "../Binaries/Intermediates/linux-x86_64/Debug/Core/Core.o",
+      "Source/Core/Core.cpp"
+    ],
+    "directory": "/home/brandon/Jengine/Core",
+    "file": "/home/brandon/Jengine/Core/Source/Core/Core.cpp",
+    "output": "/home/brandon/Jengine/Binaries/Intermediates/linux-x86_64/Debug/Core/Core.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/clang++",
+      "-DDEBUG",
+      "-ISource",
+      "-I../Engine/Source",
+      "-m64",
+      "-g",
+      "-std=c++17",
+      "-c",
+      "-o",
+      "../Binaries/Intermediates/linux-x86_64/Debug/UI/JWindow.o",
+      "Source/JWindow.cpp"
+    ],
+    "directory": "/home/brandon/Jengine/UI",
+    "file": "/home/brandon/Jengine/UI/Source/JWindow.cpp",
+    "output": "/home/brandon/Jengine/Binaries/Intermediates/linux-x86_64/Debug/UI/JWindow.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/clang++",
+      "-DDEBUG",
+      "-ISource",
+      "-I../Engine/Source",
+      "-m64",
+      "-g",
+      "-std=c++17",
+      "-c",
+      "-o",
+      "../Binaries/Intermediates/linux-x86_64/Debug/UI/ui_core.o",
+      "Source/UI_Core/ui_core.cpp"
+    ],
+    "directory": "/home/brandon/Jengine/UI",
+    "file": "/home/brandon/Jengine/UI/Source/UI_Core/ui_core.cpp",
+    "output": "/home/brandon/Jengine/Binaries/Intermediates/linux-x86_64/Debug/UI/ui_core.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/clang++",
+      "-DDEBUG",
+      "-ISource",
+      "-IColorWave",
+      "-I../Engine/Source",
+      "-m64",
+      "-g",
+      "-std=c++17",
+      "-c",
+      "-o",
+      "../Binaries/Intermediates/linux-x86_64/Debug/Game/AssetLoader.o",
+      "Source/AssetLoader/AssetLoader.cpp"
+    ],
+    "directory": "/home/brandon/Jengine/Game",
+    "file": "/home/brandon/Jengine/Game/Source/AssetLoader/AssetLoader.cpp",
+    "output": "/home/brandon/Jengine/Binaries/Intermediates/linux-x86_64/Debug/Game/AssetLoader.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/clang++",
+      "-DDEBUG",
+      "-ISource",
+      "-IColorWave",
+      "-I../Engine/Source",
+      "-m64",
+      "-g",
+      "-std=c++17",
+      "-c",
+      "-o",
+      "../Binaries/Intermediates/linux-x86_64/Debug/Game/ColorWave.o",
+      "ColorWave/ColorWave.cpp"
+    ],
+    "directory": "/home/brandon/Jengine/Game",
+    "file": "/home/brandon/Jengine/Game/ColorWave/ColorWave.cpp",
+    "output": "/home/brandon/Jengine/Binaries/Intermediates/linux-x86_64/Debug/Game/ColorWave.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/clang++",
+      "-DDEBUG",
+      "-ISource",
+      "-IColorWave",
+      "-I../Engine/Source",
+      "-m64",
+      "-g",
+      "-std=c++17",
+      "-c",
+      "-o",
+      "../Binaries/Intermediates/linux-x86_64/Debug/Game/Player.o",
+      "ColorWave/Entities/Player.cpp"
+    ],
+    "directory": "/home/brandon/Jengine/Game",
+    "file": "/home/brandon/Jengine/Game/ColorWave/Entities/Player.cpp",
+    "output": "/home/brandon/Jengine/Binaries/Intermediates/linux-x86_64/Debug/Game/Player.o"
+  }
+]

@@ -65,4 +65,6 @@ GLuint AssetLoader::loadBMP_custom(const char *imagepath)
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 
     GLuint Texture = loadBMP_custom("uvtemplate.bmp");
+
+    return Texture;
 }

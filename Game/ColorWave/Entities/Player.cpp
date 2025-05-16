@@ -18,50 +18,42 @@ char *fragmentSource = R"glsl(
 )glsl";
 
 // called every frame update
-void Player::update()
-{
-    bool changed = false;
-    if (kh->KeyPressed('D'))
-    {
-        moveRight();
-        changed = true;
-    }
-    if (kh->KeyPressed('A'))
-    {
-        moveLeft();
-        changed = true;
-    }
-    if (kh->KeyPressed('W'))
-    {
-        moveUp();
-        changed = true;
-    }
-    if (kh->KeyPressed('S'))
-    {
-        moveDown();
-        changed = true;
-    }
-    if (changed)
-    {
-        updateVertices();
-    }
+void Player::update() {
+  bool changed = false;
+  if (kh->KeyPressed('D')) {
+    moveRight();
+    changed = true;
+  }
+  if (kh->KeyPressed('A')) {
+    moveLeft();
+    changed = true;
+  }
+  if (kh->KeyPressed('W')) {
+    moveUp();
+    changed = true;
+  }
+  if (kh->KeyPressed('S')) {
+    moveDown();
+    changed = true;
+  }
+  if (changed) {
+    updateVertices();
+  }
 }
 
-void Player::onStart()
-{
-    setSpeed(5);
-    setWidth(5);
+void Player::onStart() {
+  setSpeed(5);
+  setWidth(5);
 }
 
-void Player::render(Renderer *r)
-{
-    std::cout << "Rendering..." << std::endl;
+void Player::render(Renderer *r) {
+  std::cout << "Rendering..." << std::endl;
 
-    GLuint vertexShader, fragmentShader, shaderProgram;
-    loadShaderFromFile("player_vert.glsl", GL_VERTEX_SHADER, &vertexShader);
-    loadShaderFromFile("player_frag.glsl", GL_FRAGMENT_SHADER, &fragmentShader);
-    createShaderProgram(vertexShader, fragmentShader, &shaderProgram);
+  GLuint vertexShader, fragmentShader, shaderProgram;
+  loadShaderFromFile("player_vert.glsl", GL_VERTEX_SHADER, &vertexShader);
+  loadShaderFromFile("player_frag.glsl", GL_FRAGMENT_SHADER, &fragmentShader);
+  createShaderProgram(vertexShader, fragmentShader, &shaderProgram);
 
-    // r->setShaderSource(vertexSource, fragmentSource);
-    r->draw(vertices.data(), indices.data(), vertices.size());
+  // r->setShaderSource(vertexSource, fragmentSource);
+  r->draw(vertices.data(), indices.data(), vertices.size());
 }

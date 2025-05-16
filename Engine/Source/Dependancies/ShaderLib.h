@@ -2,8 +2,8 @@
 
 #pragma once
 
-#include <iostream>
 #include <fstream>
+#include <iostream>
 #include <sstream>
 #include <string>
 
@@ -11,24 +11,45 @@
 #define GLFW_INCLUDE_GLEXT
 #include <GLFW/glfw3.h>
 
-namespace JShader
-{
-    struct Shader
-    {
-        GLuint ID;
-        std::string vertexSource;
-        std::string fragmentSource;
-    };
+#include "libs.h"
 
-    extern const char *DEFAULT_VERTEX_SHADER;
-    extern const char *DEFAULT_FRAGMENT_SHADER;
+namespace JShader {
 
-    char *slurp_file_into_malloced_cstr(const char *file_path);
-    bool compileShaderFromSource(const GLchar *source, GLenum type, GLuint *shader);
-    bool compileShader(const char *filePath, GLenum type, GLuint *shader);
-    bool createShaderProgram(GLuint vert_shader, GLuint frag_shader, GLuint *program);
-    bool loadShaderFromFile(const char *shaderName, GLenum type, GLuint *shader);
+struct Shader {
+  GLuint ID;
+  std::string vertexSource;
+  std::string fragmentSource;
+};
 
-    void DeleteShader(GLuint shader);
+struct Character {
+  GLuint TextureID;
+  glm::ivec2 Size;
+  glm::ivec2 Bearing;
+  GLuint Advance;
+};
 
-}
+extern GLuint program;
+
+extern const char *DEFAULT_VERTEX_SHADER;
+extern const char *DEFAULT_FRAGMENT_SHADER;
+
+extern const char *current_vertex_source;
+extern const char *current_frament_source;
+
+extern GLuint vertexShader;
+extern GLuint fragShader;
+
+// initialization functionality //
+// - initialize the vbo, vao //
+void initialize();
+
+// turn a glsl file into a c string //
+char *slurp_file_into_malloced_cstr(const char *file_path);
+
+// turn a glsl c string into a shader and return it //
+GLuint createShader(GLenum type, const char *source);
+
+// turn a vertexShader and a fragmentShader into a shader program //
+GLuint createShaderProgram(GLuint vertexShader, GLuint framentShader);
+
+} // namespace JShader
